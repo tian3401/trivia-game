@@ -1,13 +1,59 @@
 body{
     text-align: center;
+    background-image: url('../images/Game-of-Thrones-Wallpaper.jpg');
+    background-repeat: none;
+    background-size: cover;
+    font-family: 'Libre Franklin', sans-serif;
+    text-shadow: 1px 1px 0 #000,
+    -1px 1px 0 #000,
+    1px -1px 0 #000,
+    -1px -1px 0 #000,
+    0px 1px 0 #000,
+    0px -1px 0 #000,
+    -1px 0px 0 #000,
+    1px 0px 0 #000,
+    2px 2px 0 #000,
+    -2px 2px 0 #000,
+    2px -2px 0 #000,
+    -2px -2px 0 #000,
+    0px 2px 0 #000,
+    0px -2px 0 #000,
+    -2px 0px 0 #000,
+    2px 0px 0 #000,
+    1px 2px 0 #000,
+    -1px 2px 0 #000,
+    1px -2px 0 #000,
+    -1px -2px 0 #000,
+    2px 1px 0 #000,
+    -2px 1px 0 #000,
+    2px -1px 0 #000,
+    -2px -1px 0 #000;
+}
+
+h1, h2{
+    font-family: 'Libre Franklin', sans-serif;
 }
 
 .container{
-    margin:2% 0 2% -40%;
-    width: 80%;
+    margin:5% 0 5% -30%;
+    width: 60%;
     height: 800px;
     left: 50%;
     background-color: tan;
     position: absolute;
+    background: transparent;
+    color: white;
 }
 
+#startButton{
+    border: black;
+    padding: 15px 32px;
+    font-size: 20px;
+}
+
+button{
+    border: black;
+    padding: 15px 32px;
+    font-size: 15px;
+    margin: 2px;
+}
