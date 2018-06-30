@@ -32,13 +32,14 @@ var quesBank= [
     }
 ]
 
-var clock= 5, 
+var clock= 20, 
     countDwn,
     correctAns=0,
     incorAns=0,
     unAns=0,
     pressResult,
     pressCount=0,
+    timerCount,
     newDiv;
 
 //Functions====================================================================
@@ -56,37 +57,38 @@ $('#endMessage').hide();
 //When the button is clicked it will display the question and time. It will also hide and show content accordingly. 
 $('#startButton').on('click', function(){
     event.preventDefault();
+    $('#quesChoices').attr('data',false)
     $('.hide').show();
     $('#startButton').hide();
     displayQues();
     timer();
-    timerReset();
 });
 
-$(document).on('click','.options',function(){
+$(document).on('click','.options',function click(){
+    event.preventDefault();
     pressResult= $(this).text();
     newDiv=$('<div>');
-    event.preventDefault();
+
     //Conditional statements that dictate what happens depending on if the user got the question correct or not 
     if(pressResult==quesBank[pressCount].answer){
         newDIv= newDiv.attr('class','hide').text('You got this right!');
         $('#message').html(newDiv);
         correctAns++
         $('#numCor').text(correctAns);
-        console.log(correctAns);
         $('.hideResults').show();
+        restart();
+        
     }
     else{
         newDiv= newDiv.attr('class','hide').text('Sorry you got this one wrong. Focus! Here comes the next one');
         $('#message').html(newDiv);
         incorAns++
         $('#numIncor').text(incorAns);
-        console.log(incorAns);
         $('.hideResults').show();
-        
+        restart();
     }
-    $('#quesChoices').data('clicked',true);
-    restart();
+    $('#quesChoices').attr('data', true);
+    timer();
     pressCount++;
 
     if(pressCount==6){
@@ -132,54 +134,47 @@ function clearButtons(){
     $('.options').remove();
 };
 
-function timerReset(){
-    var setTimer= setInterval(timer,5000);
-    var setRestart= setInterval(restart,5000);
-    if($('#quesChoices').data('clicked')==true){
-        clearInterval(setTimer);
-        clearInterval(setRestart);
-        console.log('timerReset finally works');
-    }
-    else{
-        console.log('timer still works');
-    }
-};
-
+//Timer controls the clock and runs the seconds down. 
 function timer(){
-    clock= 5;
-    $('#timeBox').text('Time Remaining: ' + clock);
-    countDwn= setInterval(reduceTime,1000);
-    setTimeout(function(){
-        clearInterval(countDwn)}
-    ,5000);
+    console.log($('#quesChoices').attr('data'));
+    //Resets after button click.
+    if($('#quesChoices').attr('data')=='true'){
+        clearInterval(countDwn)
+        clock= 20;
+        $('#timeBox').text('Time Remaining: ' + clock);
+        countDwn= setInterval(reduceTime,1000); 
+        $('#quesChoices').attr('data',false);
+    }
+    //Resets after time expires.
+    else{
+        clearInterval(countDwn)
+        clock= 20;
+        $('#timeBox').text('Time Remaining: ' + clock);
+        countDwn= setInterval(reduceTime,1000); 
+        $('#quesChoices').attr('data',false);
+    }
 }; 
 
+//Function that is called by timer. Reduces the time on the clock. 
 function reduceTime(){
-    clock= clock-1;
-    var newDiv= $('<div>').attr('class','hide').text('Time Remaining: ' + clock);
-    $('#timeBox').html(newDiv);
+    
+    //This will reduce the clock to zero and stop once it reaches zero
+    if(clock>0){
+        clock= clock-1;
+        var newDiv= $('<div>').attr('class','hide').text('Time Remaining: ' + clock);
+        $('#timeBox').html(newDiv);
+  
+    }
+    
+    //Once clock <0, it will restart display and timer.
+    else{
+        clearInterval(countDwn);
+        restart();
+        timer();
+        $('#quesChoices').attr('data',false);
+        pressCount++;
+        unAns++;
+        $('#numUnAns').text(unAns);
+        $('#message').hmtl('<span>Sorry, you didn\'t answer this one.</span>')
+    }
 };
-
-//========================================================================================
-//To avoid global variables, an improvement of the above would be:
-
-function setIntervalX(callback, delay, repetitions) {
-    var x = 0;
-    var intervalID = window.setInterval(function () {
-
-       callback();
-
-       if (++x === repetitions) {
-           window.clearInterval(intervalID);
-       }
-    }, delay);
-}
-//Then you can call the new setInvervalX() function as follows:
-
-// This will be repeated every for 5 times with 1 second intervals:
-setIntervalX(function () {
-    // Your logic here
-}, 1000, 5);
-
-
-
