@@ -10,26 +10,28 @@
 </head>
 <body>
     <div class= "container">
-       
-            <h1>Trivia Game</h1>
-            <h2>"When you play the game of thrones, you win or you die."</h2>
-            <form>
-                <button id="startButton">Start</button>
-                <div class="hide" id="timeBox"></div>
-                <div class="hide" id="quesBox"></div>
-                <div class="hide" id="quesChoices"></div>
-                <div class="hideResults" id="resultsBox">
-                    <div  id="counters">
-                        #Correct: <span id="numCor"></span>
-                        #Incorrect: <span id="numIncor"></span>
-                        #Unanswered: <span id="numUnAns"></span>
-                    </div>
-                    <div id="message"></div>
-                    <img id="resImage">
+        <h1>Trivia Game</h1>
+        <h2>"When you play the game of thrones, you win or you die."</h2>
+        <form>
+            <button id="startButton">Start</button>
+            <div class="hide" id="timeBox"></div>
+            <div class="hide" id="quesBox"></div>
+            <div class="hide" id="quesChoices"></div>
+            <div class="hideResults" id="resultsBox">
+                <div  id="counters">
+                    #Correct: <span id="numCor"></span>
+                    #Incorrect: <span id="numIncor"></span>
+                    #Unanswered: <span id="numUnAns"></span>
                 </div>
-                <div id="endMessage">Let's play again?</div>
-                <button id="restartButton">Start Over?</button>
-            </form>
+                <div id="message"></div>
+                <img id="resImage">
+            </div>
+            <div id="endMessage">Let's play again?</div>
+            <button id="restartButton">Start Over?</button>
+            <audio autoplay loop id="myAudio">
+                <source type="audio/mp3" src="Game Of Thrones Official Show Open (HBO).mp3">
+            </audio>
+        </form>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="assets/javascript/app.js" type="text/javascript"></script>

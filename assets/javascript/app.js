@@ -62,6 +62,7 @@ $('#startButton').on('click', function(){
     $('#startButton').hide();
     displayQues();
     timer();
+ 
 });
 
 $(document).on('click','.options',function click(){
